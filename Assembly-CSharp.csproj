@@ -64,7 +64,7 @@
      <Compile Include="Assets\SupanthaPaul\2D Platformer Controller\Scripts\ObjectPooling\PoolObjects\ParticlePoolObject.cs" />
      <Compile Include="Assets\SupanthaPaul\2D Platformer Controller\Scripts\Player\PlayerAnimator.cs" />
      <Compile Include="Assets\SupanthaPaul\2D Platformer Controller\Scripts\Player\PlayerController.cs" />
-     <Compile Include="Assets\TestScripts\Random_Room_Test_0.cs" />
+     <Compile Include="Assets\TestScripts\Rouguelike\Random_Room_Test_0.cs" />
      <Compile Include="Assets\TestScripts\Tower_Test\Display_SomeOne.cs" />
      <Compile Include="Assets\TestScripts\Tower_Test\MasterContorller.cs" />
      <Compile Include="Assets\TestScripts\Tower_Test\TowerEnemy\Tower.cs" />
