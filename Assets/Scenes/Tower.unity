@@ -264,17 +264,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Master: {fileID: 4587638137485633306, guid: 1ab4120b1c1cffa488bdce7ee0b83323, type: 3}
-  Battery: {fileID: 2320745218382465224, guid: 7a03d984f5ae1a145a8cf197c5deaeba, type: 3}
   currentMaster: {fileID: 0}
+  wahtIs_knightRange:
+    serializedVersion: 2
+    m_Bits: 32768
+  masterRadius: 0.01
+  isMaster_InBatteryRange: 0
+  Battery: {fileID: 2320745218382465224, guid: 7a03d984f5ae1a145a8cf197c5deaeba, type: 3}
   currentBattery: {fileID: 0}
   whatIs_BatteryGenetation_Range:
     serializedVersion: 2
     m_Bits: 16384
-  wahtIs_knightRange:
-    serializedVersion: 2
-    m_Bits: 32768
-  isMaster_InBatteryRange: 0
-  masterRadius: 0.01
+  timeInterval: 5
 --- !u!1 &483841826
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,36 +743,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1516620211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1516620212}
-  m_Layer: 0
-  m_Name: Radius
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1516620212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516620211}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.01, z: -27.844727}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1537700987
 GameObject:

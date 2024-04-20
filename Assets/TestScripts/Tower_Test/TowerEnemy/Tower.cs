@@ -5,24 +5,25 @@ using UnityEngine.PlayerLoop;
 
 public class Tower : MonoBehaviour
 {
-    
+    [Header("防御塔")]
     //攻击范围
-    private float attackRange = 0.7f;
-    //
+    [SerializeField] private float attackRange = 0.7f;
+    //防御塔的生命值
+    public int health = 50;
+    //哪一个层是骑士层
     [SerializeField] private LayerMask whatIsEnemy;
 
+    [Header("子弹")]
+    //获取子弹的Prefab
     [SerializeField] private GameObject towerBulletPrefab;
     //子弹的速度
     [SerializeField] private float towerbullet_Speed = 2f;
-
-    //攻击间隔时间（秒）
-    [SerializeField] private float attackInterval = 2f;
+    //子弹攻击间隔时间（秒）
+    [SerializeField] private float attackInterval = 1f;
     //攻击冷却计时器
     private float attackCooldown = 0.0f;
-    //防御塔的生命值
-    public int health = 50;
-    //攻击对骑士造成的伤害比
-    //private float damagePercentage = 0.2f;//百分之20伤害
+
+
     
 
 
@@ -34,15 +35,7 @@ public class Tower : MonoBehaviour
     
    private void Update()
     {
-        if(attackCooldown> 0.0f)
-        {
-            attackCooldown-=Time.deltaTime;
-        }
-        else
-        {
-            Attack();
-            attackCooldown = attackInterval;
-        }
+        AttackCoolDown();
     }
 
     //找到目标后就先攻击一次
@@ -62,6 +55,7 @@ public class Tower : MonoBehaviour
     //1.当第一个骑士先进入后一个骑士再进入
     //2.当二个骑士先后进入后第二个骑士超过第一个骑士
     //3.当三个骑士先后进入后，第二个骑士超过第一个骑士，第三个骑士超过第二个骑士；
+   //寻找敌人
    private GameObject FindNearesEnemy()
     {
         GameObject nearestKnight = null;
@@ -93,5 +87,18 @@ public class Tower : MonoBehaviour
             }
         }
         return nearestKnight;
+    }
+
+   private void AttackCoolDown()
+    {
+        if (attackCooldown > 0.0f)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            Attack();
+            attackCooldown = attackInterval;
+        }
     }
 }

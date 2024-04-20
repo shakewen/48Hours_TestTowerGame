@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winPlace: {fileID: 0}
-  maxHealth: 3
-  currentHealth: 3
+  maxHealth: 10
+  currentHealth: 10
+  masterSpeed: 0.5
 --- !u!61 &1851246276
 BoxCollider2D:
   m_ObjectHideFlags: 0
