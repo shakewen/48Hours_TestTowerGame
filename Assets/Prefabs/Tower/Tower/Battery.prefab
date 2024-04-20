@@ -103,7 +103,7 @@ MonoBehaviour:
   towerBulletPrefab: {fileID: 3777599154001177987, guid: 5f725249748f64c4dadf9fa229e3be5a,
     type: 3}
   towerbullet_Speed: 5
-  attackInterval: 0.5
+  attackInterval: 0.75
 --- !u!61 &8096201741649517167
 BoxCollider2D:
   m_ObjectHideFlags: 0

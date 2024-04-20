@@ -12,9 +12,9 @@ public class MasterContorller : MonoBehaviour
     private float currentHealth = 10f;
     //骑士的移动速度
     [SerializeField] private float masterSpeed = 0.5f;
-    
 
-    
+    //颜色变化特效和变形同步持续时间
+    private float blendAndScaleTime = 0.5f;
     void Start()
     {
         
@@ -32,14 +32,25 @@ public class MasterContorller : MonoBehaviour
     //掉血脚本
     public void takeDamage(float _damage)
     {
-       
+
         currentHealth -= (maxHealth*_damage);
-        
-        if(currentHealth <=0)
+
+        gameObject.GetComponent<Animator>().SetBool("IsHurt", true);
+       
+        if (currentHealth <=0)
         {
+
 
             //播放死亡动画
             Destroy(this.gameObject);
         }
     }
+
+    //动画事件调用的函数
+    public void ResetHurtTrigger()
+    {
+        this.gameObject.GetComponent<Animator>().SetBool("IsHurt", false);
+        
+    }
+
 }

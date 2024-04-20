@@ -56,8 +56,8 @@ public class TowerBullet : MonoBehaviour
         {
             //骑士掉血
             target.GetComponent<MasterContorller>().takeDamage(bulletDamage);
-            //特效
 
+           
             //销毁子弹
             Destroy(this.gameObject);
         }

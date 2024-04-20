@@ -70,7 +70,7 @@ public class Display_SomeOne : MonoBehaviour
         whatIsHitKnight();
         
 
-        //技能是否冷却，后续每次生成时间1
+        //技能是否冷却，后续每次生成时间
         CoolDown(tower_CoolDown,3f);
         
 
