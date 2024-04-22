@@ -27,7 +27,7 @@ public class Display_SomeOne : MonoBehaviour
     //是否骑士出现在敌方领土内
     [HideInInspector] public bool isMaster_InBatteryRange;
 
-
+    
 
 
 
@@ -40,12 +40,18 @@ public class Display_SomeOne : MonoBehaviour
     [SerializeField] private LayerMask whatIs_BatteryGenetation_Range;
     //初始设置为第二次防御塔生成为5秒钟，后续每次生成时间为3秒
     [SerializeField] private float timeInterval = 5f;
+    //防御塔生成数量
+    [SerializeField] private int batteryCount = 2;
     //防御塔是否进入冷却状态
     private bool tower_CoolDown = false;
     //防御塔生成的位置
     private Vector2 battery_Genetate_Position;
 
 
+    [Header("UI界面")]
+    public GameObject knight_Cooldown;
+
+    private bool isKnight_Cooldown;
 
 
     //屏幕获取的点位
@@ -57,13 +63,13 @@ public class Display_SomeOne : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
 
     void Update()
     {
-
+        
         MouseClick_InRange();
 
 
@@ -135,18 +141,18 @@ public class Display_SomeOne : MonoBehaviour
 
 
         //当怪兽不为空且没进入冷却时间
-        if (currentMaster != null && !tower_CoolDown)
+        if (currentMaster != null && !tower_CoolDown&&batteryCount>0)
         {
-            isMaster_InBatteryRange = Physics2D.OverlapCircle(currentMaster.transform.position, masterRadius, whatIs_BatteryGenetation_Range);
-            //如果当前骑士在敌方领地内且还未生成与之对应的防御塔
-            if (isMaster_InBatteryRange && !generationMastersWithTowerGenerated[currentMaster])
-            {
-                //生成防御塔
-                TowerGenerate();
+           
+                isMaster_InBatteryRange = Physics2D.OverlapCircle(currentMaster.transform.position, masterRadius, whatIs_BatteryGenetation_Range);
+                //如果当前骑士在敌方领地内且还未生成与之对应的防御塔
+                if (isMaster_InBatteryRange && !generationMastersWithTowerGenerated[currentMaster])
+                {
+                    //生成防御塔
+                    TowerGenerate();
 
-            }
-
-
+                }
+            
         }
         else
         {
@@ -186,9 +192,11 @@ public class Display_SomeOne : MonoBehaviour
         }
 
         currentBattery = Instantiate(Battery, battery_Genetate_Position, Quaternion.identity);
-
+        //目前可生成的防御塔数量-1
+        batteryCount--;
         //炮台标记为已生成
         generationMastersWithTowerGenerated[currentMaster] = true;
+        //进入冷却
         tower_CoolDown = true;
     }
     //CoolDown（是否开启技能冷却，循环冷却时间
@@ -213,9 +221,12 @@ public class Display_SomeOne : MonoBehaviour
     //鼠标是否点击在设定范围内，且该键值对应的防御塔未生成
     public void MouseClick_InRange()
     {
-        //如果点击鼠标左键且在规定范围内
-        if (Input.GetMouseButtonDown(0) && IsClickOn2DCollider())
+        //判断是否冷却是否完毕
+        isKnight_Cooldown = knight_Cooldown.GetComponent<Knight_Cooldown>().skillButton.interactable;
+        //如果点击鼠标左键且在规定范围内且冷却完毕
+        if (Input.GetMouseButtonDown(0) && IsClickOn2DCollider()&&isKnight_Cooldown)
         {
+            knight_Cooldown.GetComponent<Knight_Cooldown>().ActivateSkill();
 
 
             //临时储存的骑士 

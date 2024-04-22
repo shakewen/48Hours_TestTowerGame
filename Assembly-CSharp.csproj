@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Knight_Cooldown.cs" />
      <Compile Include="Assets\MyScriptModels\InputManager.cs" />
      <Compile Include="Assets\MyScriptModels\PlayerController_Models_1.cs" />
      <Compile Include="Assets\SupanthaPaul\2D Platformer Controller\Scripts\Camera\CameraFollow.cs" />

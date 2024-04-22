@@ -13,8 +13,7 @@ public class MasterContorller : MonoBehaviour
     //骑士的移动速度
     [SerializeField] private float masterSpeed = 0.5f;
 
-    //颜色变化特效和变形同步持续时间
-    private float blendAndScaleTime = 0.5f;
+
     void Start()
     {
         
