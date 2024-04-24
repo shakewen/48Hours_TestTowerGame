@@ -40,6 +40,7 @@ public class Display_SomeOne : MonoBehaviour
     [SerializeField] private LayerMask whatIs_BatteryGenetation_Range;
     //初始设置为第二次防御塔生成为5秒钟，后续每次生成时间为3秒
     [SerializeField] private float timeInterval = 5f;
+    private float timeContinue = 3f;
     //防御塔生成数量
     [SerializeField] private int batteryCount = 2;
     //防御塔是否进入冷却状态
@@ -57,7 +58,9 @@ public class Display_SomeOne : MonoBehaviour
     //屏幕获取的点位
     private Vector2 point;
 
+    private Collider2D[] KnightInTowerRange;
 
+    private float towerRange = 1.5f;
 
 
 
@@ -77,7 +80,7 @@ public class Display_SomeOne : MonoBehaviour
         
 
         //技能是否冷却，后续每次生成时间
-        CoolDown(tower_CoolDown,3f);
+        CoolDown();
         
 
 
@@ -113,43 +116,53 @@ public class Display_SomeOne : MonoBehaviour
     //判断是否有能打到骑士的防御塔
     public void whatIsHitKnight()
     {
-        //如果防御塔在营地中已经有了
-        if (currentBattery != null)
-        {
-            //检测当前的所有防御塔内是否有骑士，并用数组保存
-            Collider2D[] KnightInTowerRange = Physics2D.OverlapCircleAll(currentBattery.transform.position, 1f, wahtIs_knightRange);
-            //如果场上所有的防御塔都没能够达到骑士的射击范围
-            if (KnightInTowerRange.Length == 0)
-            {
-                //判断是否生成防御塔
-                JudgmentTowerGeneration();
-            }
-            else
-            {
-                return;
-            }
-        }
-        else
-        {
+        
             //当前生成初始防御塔
             JudgmentTowerGeneration();
-        }
+        
     }
     //判断是否能够生成
     public void JudgmentTowerGeneration()
     {
-
+        
 
         //当怪兽不为空且没进入冷却时间
         if (currentMaster != null && !tower_CoolDown&&batteryCount>0)
         {
-           
-                isMaster_InBatteryRange = Physics2D.OverlapCircle(currentMaster.transform.position, masterRadius, whatIs_BatteryGenetation_Range);
-                //如果当前骑士在敌方领地内且还未生成与之对应的防御塔
-                if (isMaster_InBatteryRange && !generationMastersWithTowerGenerated[currentMaster])
-                {
-                    //生成防御塔
-                    TowerGenerate();
+            if (currentBattery != null)
+            {
+                //检测当前的所有防御塔内是否有骑士，并用数组保存
+                KnightInTowerRange = Physics2D.OverlapCircleAll(currentBattery.transform.position, towerRange, wahtIs_knightRange);
+            }
+            else
+            {
+                TowerGenerate();
+            }
+
+            //如果当前骑士的四周没有防御塔则生成防御塔
+            
+                    isMaster_InBatteryRange = Physics2D.OverlapCircle(currentMaster.transform.position, masterRadius, whatIs_BatteryGenetation_Range);
+                    //如果当前骑士在敌方领地内
+                if (isMaster_InBatteryRange)
+                {   
+                    
+                    ////还未生成与之对应的防御塔
+                    //if (!generationMastersWithTowerGenerated[currentMaster])
+                    //{
+                    //    //生成防御塔
+                    //    TowerGenerate();
+                    //}
+                     if(KnightInTowerRange.Length == 0)//如果场上所有的防御塔都没能够达到骑士的射击范围
+                    {
+                        TowerGenerate();
+                    }
+                    else
+                    {   
+
+                        return;
+                    }
+
+                    
 
                 }
             
@@ -200,20 +213,20 @@ public class Display_SomeOne : MonoBehaviour
         tower_CoolDown = true;
     }
     //CoolDown（是否开启技能冷却，循环冷却时间
-    public void CoolDown(bool _isCoolDown,float _repeatFloatTime)
+    public void CoolDown()
     {
         
         //进入冷却时间，五秒钟
-        if (_isCoolDown)
+        if (tower_CoolDown)
         {
             
             timeInterval -= Time.deltaTime;
             if (timeInterval < 0)
             {
-                timeInterval = _repeatFloatTime;
-                _isCoolDown = false;
+                timeInterval = timeContinue;
+                tower_CoolDown = false;
                 
-                tower_CoolDown = _isCoolDown;
+                
                 
             }
         }

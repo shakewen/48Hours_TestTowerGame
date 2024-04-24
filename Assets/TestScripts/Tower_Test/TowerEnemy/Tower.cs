@@ -9,7 +9,8 @@ public class Tower : MonoBehaviour
     //攻击范围
     [SerializeField] private float attackRange = 0.7f;
     //防御塔的生命值
-    public int health = 50;
+    public float health = 10;
+    public float currentHealth = 10;
     //哪一个层是骑士层
     [SerializeField] private LayerMask whatIsEnemy;
 
@@ -99,6 +100,17 @@ public class Tower : MonoBehaviour
         {
             Attack();
             attackCooldown = attackInterval;
+        }
+    }
+
+    public void takeDamage(float _damage)
+    {
+        print("防御塔受到了伤害");
+        currentHealth -= (health * _damage);
+        //播放扣血动画
+        if (currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
